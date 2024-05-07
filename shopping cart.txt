@@ -1,0 +1,85 @@
+// Use DBML to define your database structure
+// Docs: https://dbml.dbdiagram.io/docs
+
+
+
+Table m_user {
+  user_id integer [primary key]
+  user_status bool
+  user_role_id int
+  user_name varchar
+  user_password varchar
+  user_fullname varchar
+  user_email varchar
+  user_hp varchar
+  user_address text
+  user_province_id varchar
+
+  created_at timestamp
+}
+
+Table m_province {
+  province_id integer [primary key]
+  province_name varchar
+}
+
+Table m_user_role {
+  role_id integer [primary key]
+  role_name varchar
+}
+
+
+Table m_product {
+  product_id integer [primary key]
+  product_status bool
+  product_category_id int
+  product_name varchar
+  product_desc text
+  product_qty int
+  product_price int
+  created_at timestamp
+}
+
+Table m_product_category {
+  category_id integer [primary key]
+  category_name varchar
+  
+}
+
+Table transaction {
+  tr_id integer [primary key]
+  tr_status bool 
+  tr_user_id varchar
+  tr_payment_id text
+  tr_total_payment int
+  created_at timestamp
+}
+
+Table transaction_detail{
+  detail_id integer [primary key]
+  detail_status bool
+  detail_product_id int
+  detail_qty int
+  detail_price int
+  detail_subtotal int
+  detail_transaction_id int
+}
+
+Table m_payment{
+  payment_id integer [primary key]
+  payment_name varchar
+}
+
+Ref: "m_province"."province_id" < "m_user"."user_province_id"
+
+Ref: "m_user_role"."role_id" < "m_user"."user_role_id"
+
+Ref: "m_product_category"."category_id" < "m_product"."product_category_id"
+
+Ref: "m_user"."user_id" < "transaction"."tr_user_id"
+
+Ref: "m_payment"."payment_id" < "transaction"."tr_payment_id"
+
+Ref: "transaction"."tr_id" < "transaction_detail"."detail_transaction_id"
+
+Ref: "m_product"."product_id" < "transaction_detail"."detail_product_id"

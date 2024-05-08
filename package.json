@@ -1,0 +1,11 @@
+{
+  "name": "11-rizki-bej-gold",
+  "version": "1.0.0",
+  "description": "Challenge Binar Gold Rizki",
+  "main": "index.js",
+  "scripts": {
+    "test": "index.js"
+  },
+  "author": "Rizkina MS",
+  "license": "ISC"
+}

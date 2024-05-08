@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const port = 3000;
+const morgan = require('morgan');
 
 //middleware
 const logger = (req,res, next) =>{
@@ -8,10 +9,13 @@ const logger = (req,res, next) =>{
     next();
 }
 app.use(logger);
-
-app.get('/',(req, res) =>
-    res.send('Hello World')
+app.use(morgan('dev'));
+app.get('/home',(req, res) =>
+    res.send('halaman home')
 );
+
+const router = require('./routes/router');
+app.use(router);
 
 app.use(express.json());
 app.use(express.urlencoded({extended:false}));

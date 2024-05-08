@@ -4,8 +4,13 @@
   "description": "Challenge Binar Gold Rizki",
   "main": "index.js",
   "scripts": {
-    "test": "index.js"
+    "test": "test",
+    "start": "index.js"
   },
   "author": "Rizkina MS",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.19.2",
+    "nodemon": "^3.1.0"
+  }
 }

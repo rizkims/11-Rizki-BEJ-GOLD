@@ -10,18 +10,22 @@ const logger = (req,res, next) =>{
 }
 app.use(logger);
 app.use(morgan('dev'));
-app.get('/home',(req, res) =>
-    res.send('halaman home')
-);
+app.set('view engine','ejs');
+
+
 
 const router = require('./routes/router');
 app.use(router);
 
 app.use(express.json());
 app.use(express.urlencoded({extended:false}));
+app.use(express.static('public'));
 
 //router
-
+app.use('/', router)
+app.get('/home',(req, res) =>
+    res.send('halaman home')
+);
 
 app.get('/datajson',(req, res) =>
     res.json([{
@@ -29,11 +33,18 @@ app.get('/datajson',(req, res) =>
         'name':'rizki',
     },{
         'id':2,
-        'name':'jono'
+        'name':'joko'
     }])
 );
 
+app.use(function (req, res, next){
+    res.status(404).json({
+        status :'failed',
+        errors : 'not found'
+    });
+}
 
+);
 
 app.listen(port,() => console.log(`working at http://localhost:/${port}`))
 
